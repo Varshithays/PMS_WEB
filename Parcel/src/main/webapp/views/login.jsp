@@ -40,8 +40,18 @@
         </div>
     </div>
        <jsp:include page="footer.jsp" />
-    <script src="js/script.js"></script>
-   
+    <script src="script.js"></script>
+   <script>
+        document.getElementById('loginButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            const userType = document.getElementById('userType').value;
+            if (userType === 'customer') {
+                window.location.href = 'customer-home.jsp';
+            } else if (userType === 'officer') {
+                window.location.href = 'officer-home.jsp';
+            }
+        });
+    </script>
 </body>
 </html>
 
