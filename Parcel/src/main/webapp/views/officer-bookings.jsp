@@ -15,7 +15,7 @@
         <div class="main-content">
             <div class="container">
                 <h1>Book a Service for Customer</h1>
-                <form id="officer-booking-form">
+                <form action="OfficerBookingServlet" method="post" id="officer-booking-form">
                     <h2>Sender Information</h2>
                     <div class="form-group">
                         <label for="sender-name">Name:</label>
@@ -27,13 +27,16 @@
                     </div>
                     <div class="form-group">
                         <label for="sender-contact">Contact:</label>
-                        <input type="tel" id="sender-contact" name="sender-contact" required>
+                        <input type="tel" id="sender-contact" name="sender-contact" required
+                        pattern="[6-9][0-9]{9}" title="Please enter valid 10-digit mobile number starting with 6-9">
                     </div>
 
                     <h2>Receiver Information</h2>
                     <div class="form-group">
                         <label for="receiver-name">Name:</label>
                         <input type="text" id="receiver-name" name="receiver-name" required>
+                      
+                    </div>
                     </div>
                     <div class="form-group">
                         <label for="receiver-address">Address:</label>
@@ -41,11 +44,12 @@
                     </div>
                     <div class="form-group">
                         <label for="receiver-pincode">Pin Code:</label>
-                        <input type="text" id="receiver-pincode" name="receiver-pincode" required>
+                        <input type="text" id="receiver-pincode" name="receiver-pincode" required
+                          pattern="[0-9]{6}" title="Please enter valid 6-digit pincode">
                     </div>
                     <div class="form-group">
                         <label for="receiver-contact">Contact:</label>
-                        <input type="tel" id="receiver-contact" name="receiver-contact" required>
+                        <input type="tel" id="receiver-contact" name="receiver-contact" required pattern="[6-9][0-9]{9}" title="Please enter valid 10-digit mobile number starting with 6-9">
                     </div>
 
                     <h2>Parcel Details</h2>
@@ -99,7 +103,6 @@
                             <option value="premium">Premium Insurance</option>
                         </select>
                     </div>
-
                     <button type="submit" class="btn bth:hover">Book Service</button>
                 </form>
             </div>

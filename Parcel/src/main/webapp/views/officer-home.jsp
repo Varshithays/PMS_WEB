@@ -1,5 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page session="true" %>
+<%
+    // Retrieve user session details
+    String username = (String) session.getAttribute("userName");
+    String role = (String) session.getAttribute("role");
+
+    if (username == null || !"officer".equals(role)) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +17,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Officer Home - Parcel Management System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-         
     <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+    <script src="<%= request.getContextPath() %>/script.js" defer></script>
 </head>
 <body>
     <div class="app-container">
@@ -55,45 +65,5 @@
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            updateNavigation();
-            loadOfficerDashboardData();
-        });
-
-        function loadOfficerDashboardData() {
-            // Simulating data loading
-            setTimeout(() => {
-                document.getElementById('pending-pickups').textContent = '5';
-                document.getElementById('in-transit').textContent = '12';
-                document.getElementById('delivered-today').textContent = '8';
-                document.getElementById('issues-reported').textContent = '2';
-
-                const recentActivity = [
-                    { id: 'B001', customerId: 'C001', date: '2023-05-01', status: 'Delivered' },
-                    { id: 'B002', customerId: 'C002', date: '2023-05-03', status: 'In Transit' },
-                    { id: 'B003', customerId: 'C003', date: '2023-05-05', status: 'Pending Pickup' },
-                    { id: 'B004', customerId: 'C004', date: '2023-05-06', status: 'Issue Reported' },
-                ];
-
-                const activityTable = document.getElementById('recent-activity').getElementsByTagName('tbody')[0];
-                recentActivity.forEach(activity => {
-                    const row = activityTable.insertRow();
-                    row.innerHTML = `
-                        <td>${activity.id}</td>
-                        <td>${activity.customerId}</td>
-                        <td>${activity.date}</td>
-                        <td>${activity.status}</td>
-                        <td>
-                            <a href="tracking.html?id=${activity.id}" class="btn btn-primary btn-sm">Track</a>
-                            <a href="delivery-status.html?id=${activity.id}" class="btn btn-secondary btn-sm">Update</a>
-                        </td>
-                    `;
-                });
-            }, 1000);
-        }
-    </script>
 </body>
 </html>
-

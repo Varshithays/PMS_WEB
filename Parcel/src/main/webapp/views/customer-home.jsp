@@ -1,20 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page session="true" %>
+<%
+    // Retrieve user session details
+    String username = (String) session.getAttribute("userName");
+    String role = (String) session.getAttribute("role");
 
+    if (username == null || !"customer".equals(role)) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Home - Parcel Management System</title>
-       <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+    <script src="<%= request.getContextPath() %>/script.js" defer></script>
 </head>
 <body>
     <div class="app-container">
         <div class="sidebar"></div>
         <div class="main-content">
             <div class="container">
-                <h1>Welcome to Your Dashboard</h1>
+                <h1>Welcome to Your Dashboard, <%= username %></h1>
                 <p class="mb-4">Here you can manage your parcels and track your shipments.</p>
                 
                 <div class="dashboard-summary">
@@ -49,38 +60,6 @@
             </div>
         </div>
     </div>
-    <script src="<%= request.getContextPath() %>/script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            updateNavigation();
-            loadDashboardData();
-        });
-
-        function loadDashboardData() {
-            // Simulating data loading
-            setTimeout(() => {
-                document.getElementById('active-shipments').textContent = '3';
-                document.getElementById('total-bookings').textContent = '12';
-                document.getElementById('delivered-parcels').textContent = '8';
-
-                const recentActivity = [
-                    { id: 'B001', date: '2023-05-01', status: 'Delivered' },
-                    { id: 'B002', date: '2023-05-03', status: 'In Transit' },
-                    { id: 'B003', date: '2023-05-05', status: 'Booked' },
-                ];
-
-                const activityTable = document.getElementById('recent-activity').getElementsByTagName('tbody')[0];
-                recentActivity.forEach(activity => {
-                    const row = activityTable.insertRow();
-                    row.innerHTML = `
-                        <td>${activity.id}</td>
-                        <td>${activity.date}</td>
-                        <td>${activity.status}</td>
-                        <td><a href="tracking.html?id=${activity.id}" class="btn btn-primary btn-sm">Track</a></td>
-                    `;
-                });
-            }, 1000);
-        }
-    </script>
+     <script src="<%= request.getContextPath() %>/script.js" defer></script>
 </body>
 </html>

@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Tracking - Parcel Management System</title>
-     <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
-    
+<meta charset="UTF-8">
+<title>Officer Tracking - Parcel Management System</title>
 </head>
 <body>
+
     <div class="sidebar"></div>
     <div class="main-content">
         <div class="container">
@@ -22,19 +20,18 @@
                 <button type="submit">Track</button>
             </form>
             <div id="tracking-result">
-         
+             <c:if test="${not empty trackingInfo}">
                     <h2>Tracking Information</h2>
                     <p><strong>Booking ID:</strong> ${trackingInfo.bookingId}</p>
                     <p><strong>Status:</strong> ${trackingInfo.status}</p>
                     <p><strong>Receiver Name:</strong> ${trackingInfo.receiverName}</p>
                     <p><strong>Delivery Address:</strong> ${trackingInfo.receiverAddress}</p>
                     <p><strong>Estimated Delivery:</strong> ${trackingInfo.estimatedDelivery}</p>
-               </div>
+                </c:if></div>
         </div>
     </div>
     <script src="script.js"></script>
-    
+   
+ <jsp:include page="footer.jsp" />
 </body>
 </html>
-
-    
