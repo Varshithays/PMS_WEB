@@ -1,0 +1,18 @@
+function validateUsername(username) {
+    return username.length >= 5 && username.length <= 20;
+}
+
+function validatePassword(password) {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,30})/;
+    return regex.test(password);
+}
+
+function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+function validateMobile(mobile) {
+    const regex = /^[6-9]\d{9}$/;
+    return regex.test(mobile);
+}

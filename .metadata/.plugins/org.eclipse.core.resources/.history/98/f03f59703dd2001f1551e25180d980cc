@@ -1,0 +1,32 @@
+function validateUsername(username) {
+    return username.length >= 5 && username.length <= 20;
+}
+
+function validatePassword(password) {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,30})/;
+    return regex.test(password);
+}
+
+function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+function validateMobile(mobile) {
+    const regex = /^[6-9]\d{9}$/;
+    return regex.test(mobile);
+}
+// Tab Switching for Login Page
+let currentUserType = 'customer'; // Default user type
+function switchTab(userType) {
+    currentUserType = userType;
+    document.getElementById('customerTab').classList.toggle('active', userType === 'customer');
+    document.getElementById('officerTab').classList.toggle('active', userType === 'officer');
+    document.getElementById('registerLink').style.display = userType === 'customer' ? 'block' : 'none';
+    document.getElementById('loginForm').reset();
+    document.querySelectorAll('.error').forEach(error => (error.style.display = 'none'));
+}
+
+document.getElementById('customerTab').addEventListener('click', () => switchTab('customer'));
+document.getElementById('officerTab').addEventListener('click', () => switchTab('officer'));
+
