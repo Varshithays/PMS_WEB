@@ -2,13 +2,9 @@
 <%@ page session="true" %>
 <%
     // Retrieve user session details
-    String username = (String) session.getAttribute("userName");
+    String username = (String) session.getAttribute("username");
     String role = (String) session.getAttribute("role");
-
-    if (username == null || !"customer".equals(role)) {
-        response.sendRedirect(request.getContextPath() + "/login.jsp");
-        return;
-    }
+   
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,11 +14,10 @@
     <title>Customer Home - Parcel Management System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
-    <script src="<%= request.getContextPath() %>/script.js" defer></script>
 </head>
 <body>
     <div class="app-container">
-        <div class="sidebar"></div>
+        <jsp:include page="sidebar.jsp" />
         <div class="main-content">
             <div class="container">
                 <h1>Welcome to Your Dashboard, <%= username %></h1>
@@ -60,6 +55,7 @@
             </div>
         </div>
     </div>
-     <script src="<%= request.getContextPath() %>/script.js" defer></script>
+    <script src="<%= request.getContextPath() %>script.js"></script>
+    <jsp:include page="footer.jsp" />
 </body>
 </html>

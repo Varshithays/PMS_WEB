@@ -22,7 +22,7 @@
 </head>
 <body>
     <div class="app-container">
-        <div class="sidebar"></div>
+       <jsp:include page="sidebar.jsp" />
         <div class="main-content">
             <div class="container">
                 <h1>Welcome, Officer</h1>

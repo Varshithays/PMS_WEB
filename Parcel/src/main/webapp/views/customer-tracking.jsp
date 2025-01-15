@@ -10,7 +10,7 @@
     
 </head>
 <body>
-    <div class="sidebar"></div>
+    <jsp:include page="sidebar.jsp" />
     <div class="main-content">
         <div class="container">
             <h1>Track Your Parcel</h1>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <script src="script.js"></script>
-    
+    <jsp:include page="footer.jsp" />
 </body>
 </html>
 

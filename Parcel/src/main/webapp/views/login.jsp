@@ -7,7 +7,6 @@
     <title>Login - Parcel Management System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
-
 </head>
 <body>
     <div class="navbar">
@@ -26,10 +25,16 @@
             <div class="form-group">
                 <label for="username">User ID:</label>
                 <input type="text" id="username" name="username" required minlength="5" maxlength="20">
+                <% if (request.getAttribute("usernameError") != null) { %>
+                    <span class="error-message"><%= request.getAttribute("usernameError") %></span>
+                <% } %>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required minlength="8" maxlength="30">
+                <% if (request.getAttribute("passwordError") != null) { %>
+                    <span class="error-message"><%= request.getAttribute("passwordError") %></span>
+                <% } %>
             </div>
             <input type="hidden" id="userType" name="userType" value="customer">
             <button type="submit" id="loginButton" class="btn btn-primary">Login</button>
@@ -38,19 +43,8 @@
             <p>Don't have an account? <a href="register.jsp">Register here</a></p>
         </div>
     </div>
-       <jsp:include page="footer.jsp" />
-    <script src="script.js"></script>
-   <script>
-        document.getElementById('loginButton').addEventListener('click', function(event) {
-            event.preventDefault();
-            const userType = document.getElementById('userType').value;
-            if (userType === 'customer') {
-                window.location.href = 'customer-home.jsp';
-            } else if (userType === 'officer') {
-                window.location.href = 'officer-home.jsp';
-            }
-        });
-    </script>
+    <jsp:include page="footer.jsp" />
+    <script src="<%= request.getContextPath() %>/script.js"></script>
 </body>
 </html>
 

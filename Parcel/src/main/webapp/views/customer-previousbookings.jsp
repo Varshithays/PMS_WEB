@@ -30,8 +30,7 @@
 </head>
 <body>
     <div class="app-container">
-        <!-- Sidebar -->
-        <div class="sidebar"></div>
+       <jsp:include page="sidebar.jsp" />
 
         <!-- Main Content -->
         <div class="main-content">
@@ -82,5 +81,6 @@
         </div>
     </div>
     <script src="<%= request.getContextPath() %>/script.js"></script>
+    <jsp:include page="footer.jsp" />
 </body>
 </html>

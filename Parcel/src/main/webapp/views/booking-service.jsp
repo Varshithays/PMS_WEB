@@ -6,10 +6,7 @@
     String userAddress = (String) session.getAttribute("userAddress");
     String userContact = (String) session.getAttribute("userContact");
 
-    if (username == null) {
-        response.sendRedirect(request.getContextPath() + "/login");
-        return;
-    }
+   
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,9 +20,8 @@
 </head>
 <body>
     <div class="app-container">
-        <!-- Sidebar dynamically rendered using JavaScript -->
-        <div class="sidebar"></div>
-
+       
+ <jsp:include page="sidebar.jsp" />
         <div class="main-content">
             <div class="container">
                 <h1>Book a Service</h1>
@@ -92,11 +88,46 @@
                         <label for="parcel-contents">Contents Description:</label>
                         <textarea id="parcel-contents" name="parcelContents" required></textarea>
                     </div>
+                    
+                     <h2>Shipping Options</h2>
+                    <div class="form-group">
+                        <label for="delivery-speed">Delivery Speed:</label>
+                        <select id="delivery-speed" name="delivery-speed" required>
+                            <option value="standard">Standard</option>
+                            <option value="express">Express</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="packaging">Packaging Preference:</label>
+                        <select id="packaging" name="packaging" required>
+                            <option value="standard">Standard Packaging</option>
+                            <option value="custom">Custom Packaging</option>
+                            <option value="eco">Eco-friendly Packaging</option>
+                            <option value="fragile">Fragile Item Handling</option>
+                        </select>
+                    </div>
+
+                    <h2>Date and Time Selection</h2>
+                    <div class="form-group">
+                        <label for="pickup-time">Preferred Pickup Time:</label>
+                        <input type="datetime-local" id="pickup-time" name="pickup-time" required>
+                    </div>
+
+                    <h2>Additional Services</h2>
+                    <div class="form-group">
+                        <label for="insurance">Insurance:</label>
+                        <select id="insurance" name="insurance">
+                            <option value="none">No Insurance</option>
+                            <option value="basic">Basic Insurance</option>
+                            <option value="premium">Premium Insurance</option>
+                        </select>
+                    </div>
 
                     <button type="submit" class="btn btn-primary">Book Service</button>
                 </form>
             </div>
         </div>
     </div>
+     <jsp:include page="footer.jsp" />
 </body>
 </html>

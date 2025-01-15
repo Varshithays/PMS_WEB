@@ -11,11 +11,12 @@
 </head>
 <body>
     <div class="app-container">
-        <div class="sidebar"></div>
+        
+<jsp:include page="sidebar.jsp" />
         <div class="main-content">
             <div class="container">
                 <h1>Book a Service for Customer</h1>
-                <form action="OfficerBookingServlet" method="post" id="officer-booking-form">
+                <form  id="officer-booking-form" action="OfficerBookingServlet" method="post">
                     <h2>Sender Information</h2>
                     <div class="form-group">
                         <label for="sender-name">Name:</label>
@@ -25,10 +26,16 @@
                         <label for="sender-address">Address:</label>
                         <textarea id="sender-address" name="sender-address" required></textarea>
                     </div>
+                    
+                    <div class="form-group">
+    				<label for="sender-pincode">Sender Pin Code:</label>
+    				<input type="text" id="sender-pincode" name="sender-pincode" required 
+    				pattern="[0-9]{6}" title="Please enter a valid 6-digit pincode"></div>
+
                     <div class="form-group">
                         <label for="sender-contact">Contact:</label>
                         <input type="tel" id="sender-contact" name="sender-contact" required
-                        pattern="[6-9][0-9]{9}" title="Please enter valid 10-digit mobile number starting with 6-9">
+                        pattern="[6-9][0-9]{9}" title="Please enter valid 10-digit mobile number">
                     </div>
 
                     <h2>Receiver Information</h2>
@@ -49,7 +56,7 @@
                     </div>
                     <div class="form-group">
                         <label for="receiver-contact">Contact:</label>
-                        <input type="tel" id="receiver-contact" name="receiver-contact" required pattern="[6-9][0-9]{9}" title="Please enter valid 10-digit mobile number starting with 6-9">
+                        <input type="tel" id="receiver-contact" name="receiver-contact" required pattern="[6-9][0-9]{9}" title="Please enter valid 10-digit mobile number">
                     </div>
 
                     <h2>Parcel Details</h2>
@@ -135,36 +142,7 @@
                     return;
                 }
 
-                const senderName = document.getElementById('sender-name').value;
-                const bookingId = generateBookingId();
-                const customerId = generateCustomerId(senderName, senderContact);
-
-                const bookingData = {
-                    bookingId,
-                    customerId,
-                    senderName,
-                    senderAddress: document.getElementById('sender-address').value,
-                    senderContact,
-                    receiverName: document.getElementById('receiver-name').value,
-                    receiverAddress: document.getElementById('receiver-address').value,
-                    receiverPincode: document.getElementById('receiver-pincode').value,
-                    receiverContact,
-                    parcelSize: document.getElementById('parcel-size').value,
-                    parcelWeight: document.getElementById('parcel-weight').value,
-                    parcelContents: document.getElementById('parcel-contents').value,
-                    deliverySpeed: document.getElementById('delivery-speed').value,
-                    packaging: document.getElementById('packaging').value,
-                    pickupTime: document.getElementById('pickup-time').value,
-                    insurance: document.getElementById('insurance').value,
-                    status: 'Booked'
-                };
-
-                let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
-                bookings.push(bookingData);
-                localStorage.setItem('bookings', JSON.stringify(bookings));
-
-                alert(`Booking successful! Booking ID: ${bookingId}, Customer ID: ${customerId}`);
-                window.location.href = 'pay-bill.html?bookingId=' + bookingId;
+             
 
                // this.reset();
             });
@@ -173,6 +151,8 @@
        
         
     </script>
+    
+<jsp:include page="footer.jsp" />
 </body>
 </html>
 
